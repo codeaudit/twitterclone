@@ -45,6 +45,8 @@ public class LoginServlet extends HttpServlet
     	response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
         
+        // http://localhost:8090/bootcamp/main.html
+        response.sendRedirect("http://localhost:8090/bootcamp/main.html");
         
     	Connection c = null;
         try {

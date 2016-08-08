@@ -20,10 +20,6 @@ public class User {
     @DatabaseField
     private String profile;
 
-	
-
-
-
 
 	public User() {
 		// TODO Auto-generated constructor stub
