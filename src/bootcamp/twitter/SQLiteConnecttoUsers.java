@@ -141,7 +141,7 @@ public class SQLiteConnecttoUsers {
 	 */
 	public static void main(String[] args) {
 		connectUsers(1);
-		connectTweets(1);
+		connectTweets(2);
 		connectFollowers(1);
 	}
 }
