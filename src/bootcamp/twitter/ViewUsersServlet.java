@@ -13,12 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import bootcamp.twitter.facade.ViewTweets;
+import bootcamp.twitter.facade.ViewUsers;
 
-public class ViewTweetsServlet extends HttpServlet
+public class ViewUsersServlet extends HttpServlet
 {
     
 	private static final long serialVersionUID = 1L;
-    public ViewTweetsServlet(){}
+    public ViewUsersServlet(){}
     
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -28,16 +29,10 @@ public class ViewTweetsServlet extends HttpServlet
     	response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
       
-        ViewTweets view = new ViewTweets();
+        ViewUsers view = new ViewUsers();
         Map map = new HashMap();
         map.put("user", request.getParameter("user"));
         
-        String message = request.getParameter("message");
-        if( message != null )
-             {
-        	 map.put("message", message);
-        	 view.add(map);
-        	 }        
         List<Object> result =  view.execute(map);       
         
         Gson gson = new Gson();

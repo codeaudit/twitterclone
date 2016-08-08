@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,8 +27,24 @@ public class LoginServlet extends HttpServlet
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+    	Cookie[] cookies = request.getCookies();
+    	for(Cookie c: cookies)
+    	{
+    		
+    		System.out.println("cookie name = " +c.getName());
+    		System.out.println("cookie value = " +c.getValue());
+    	}
+    	
+    	
+    	System.out.println(request.getParameterMap());
+    	
+    	
+    	Cookie cookie = new Cookie("user",request.getParameter("user"));
+    	response.addCookie(cookie);
+    	
     	response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
+        
         
     	Connection c = null;
         try {

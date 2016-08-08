@@ -19,7 +19,7 @@ public class Tweet {
 	@DatabaseField
 	String message;
 	@DatabaseField
-	Date hitTime;
+	Date hitTime = new Date();
 	
 	
 

@@ -2,6 +2,8 @@ package bootcamp.twitter.facade;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -27,14 +29,42 @@ public class ViewTweets
         this.greeting=greeting;
     }
     
-    public List<Object> execute(Map request) 
+    public List execute(Map request) 
     {
         ConnectionSource  connectionSource;
     	Dao<User, Integer> userDao; 
     	Dao<Follower, Integer> followerDao; 
     	Dao<Tweet, Integer> tweetDao = null;
         
-        try {
+        tweetDao = setup(tweetDao);
+    	
+	        
+        List<Tweet> list = new ArrayList<Tweet>();
+       
+
+        
+        for (Tweet tweet: tweetDao) { 
+       	 list.add(tweet);
+		}
+        
+        Collections.sort((List<Tweet>)list, new Comparator<Tweet>() {
+
+			@Override
+			public int compare(Tweet o1, Tweet o2) {
+				if( o1.getHitTime() != null && o2.getHitTime() != null)
+					return  - o1.getHitTime().compareTo(o2.getHitTime());
+				return 0;
+				}
+		});
+        
+        return list;
+    }
+    
+	private Dao<Tweet, Integer> setup(Dao<Tweet, Integer> tweetDao) {
+		ConnectionSource connectionSource;
+		Dao<User, Integer> userDao;
+		Dao<Follower, Integer> followerDao;
+		try {
 			connectionSource =
 					  new JdbcConnectionSource("jdbc:sqlite:test.db");
 			
@@ -48,16 +78,35 @@ public class ViewTweets
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return tweetDao;
+	}
+	public List<Object> add(Map map) {
+		ConnectionSource  connectionSource;
+    	Dao<User, Integer> userDao; 
+    	Dao<Follower, Integer> followerDao; 
+    	Dao<Tweet, Integer> tweetDao = null;
+        
+        tweetDao = setup(tweetDao);
     	
 	        
         List<Object> list = new ArrayList<Object>();
        
-
+        Tweet newTweet = new Tweet();
+        newTweet.setMessage((String) map.get("message"));
+        //newTweet.setUserId((int) map.get("user"));
+        
+        try {
+			tweetDao.create(newTweet);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         for (Tweet tweet: tweetDao) { 
        	 list.add(tweet);
 		}
         
         return list;
-    }
+		
+	}
 }

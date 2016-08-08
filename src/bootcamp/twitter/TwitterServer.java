@@ -58,6 +58,7 @@ public class TwitterServer extends AbstractHandler {
 	     servletContext.addServlet(new ServletHolder(new ViewFollowersServlet()),"/followers.do");
 	     servletContext.addServlet(new ServletHolder(new ViewNewsFeedServlet()),"/news.do");
 	     servletContext.addServlet(new ServletHolder(new ViewTweetsServlet()),"/tweets.do");
+	     servletContext.addServlet(new ServletHolder(new ViewUsersServlet()),"/users.do");
 	     servletContext.addServlet(new ServletHolder(new UpdateUserServlet()),"/updateUser.do");
 	     servletContext.addServlet(new ServletHolder(new UpdateUserServlet()),"/addTweet.do");
 				
