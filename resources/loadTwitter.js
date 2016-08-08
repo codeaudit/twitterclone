@@ -1,4 +1,5 @@
-var serviceLoc =  "http://localhost:8090/bootcamp/twittermessage.json";
+var serviceLoc = "http://localhost:8090/servlet/tweets.do";
+// "http://localhost:8090/bootcamp/twittermessage.json";
 
 /*
 // create data object to contain form data
@@ -57,11 +58,12 @@ function go(){
 }*/
 
 
-function loadText(txtTwitter,addressbook)
+function loadTweet()
 {
 	//alert(txtTwitter);
 	    var xhttp;
 		var url = serviceLoc;
+		//alert("url")
 		var textval=new Array();
 		var txtTwitter = document.getElementById("idtxtTwitter").value;  
 		var currentdate = new Date().toGMTString();
@@ -89,8 +91,8 @@ function loadText(txtTwitter,addressbook)
 									
 									
 								
-								if (txtTwitter === content[i].Textname)
-								{
+								//if (txtTwitter === content[i].message)
+								//{
 									//alert("1");
 								//txtArr.push( txtTwitter.value );
 								//alert(txtArr.length);
@@ -100,27 +102,27 @@ function loadText(txtTwitter,addressbook)
 									//txt.setAttribute("value",txtTwitter+"  "+currentdate);
 									 txt.setAttribute("id","txtid");
 									 
-									 txt.innerHTML=content[i].Textname+"  "+currentdate;
+									 txt.innerHTML=content[i].message+"  "+currentdate;
 									 div1.appendChild(txt);
 									 
 									 div1.setAttribute("class","jo");
 									 //content.sort( predicatBy("id") );
 									 document.getElementById("content").appendChild(div1);
-									 break;
-								}else
-								{
+									// break;
+								//}else
+								//{
 										 //alert("2");
-									 txt.setAttribute("cols", 50);
-									 txt.setAttribute("rows", 3);
+									// txt.setAttribute("cols", 50);
+									// txt.setAttribute("rows", 3);
 									//txt.setAttribute("value",txtTwitter+"  "+currentdate);
-									 txt.setAttribute("id","txtid");
-									 txt.innerHTML=content[i].Textname+"  "+currentdate;
-									 div1.appendChild(txt);
+									// txt.setAttribute("id","txtid");
+									// txt.innerHTML=content[i].message+"  "+currentdate;
+									// div1.appendChild(txt);
 									 
-									 div1.setAttribute("class","jo");
+									// div1.setAttribute("class","jo");
 									
-									 document.getElementById("content").appendChild(div1);
-									 }
+									// document.getElementById("content").appendChild(div1);
+									// }
 									// content.sort(SortByID).reverse();
 								}
 							
@@ -128,10 +130,6 @@ function loadText(txtTwitter,addressbook)
 						}
 			};
 		
-function SortByID(x,y) {
-      return x.ID - y.ID; 
-    }
-
 //Usage
 
 					
