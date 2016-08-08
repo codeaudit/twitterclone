@@ -105,7 +105,7 @@
 	    		for (var i =0 ; i < arr.length; i++){
 	    			data = arr[i];
 					var obj1 = document.getElementById("id01");
-					vhtml = vhtml + '<div class="bgcolor"><div><img src="dist/img/'+ data.pic +'" alt="Profile Picture" height="72" width="72"></div><div><span class="lead"><a href="profile.html?id=' + data.id +'">' + data.id + data.fullName + '</a></span><br/><span>' + data.title + '</div></div>';
+					vhtml = vhtml + '<div class="bgcolor"><div class="col-md-2"><img src="dist/img/'+ data.pic +'" alt="Profile Picture" height="72" width="72"></div><div class="col-md-2"><span class="lead"><a href="profile.html?id=' + data.id +'">' + data.id + data.fullName + '</a></span><br/><span>' + data.title + '</div></div>';
 				}
 				//alert(vhtml);
 				obj1.innerHTML = vhtml;
