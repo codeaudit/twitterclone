@@ -1,4 +1,4 @@
-[
+{"employee":[
         {"id": 1, "firstName": "James", "lastName": "King", "fullName": "James King", "managerId": 0, "reports": 4, "managerName": "", "title": "President and CEO", "department": "Corporate", "cellPhone": "617-000-0001", "officePhone": "781-000-0001", "email": "jking@fakemail.com", "city": "Boston, MA", "pic": "james_king.jpg", "twitterId": "@fakejking", "blog": "http://coenraets.org"},
         {"id": 2, "firstName": "Julie", "lastName": "Taylor", "fullName": "Julie Taylor", "managerId": 1, "reports": 2, "managerName": "James King", "title": "VP of Marketing", "department": "Marketing", "cellPhone": "617-000-0002", "officePhone": "781-000-0002", "email": "jtaylor@fakemail.com", "city": "Boston, MA", "pic": "julie_taylor.jpg", "twitterId": "@fakejtaylor", "blog": "http://coenraets.org"},
         {"id": 3, "firstName": "Eugene", "lastName": "Lee", "fullName": "Eugene Lee", "managerId": 1, "reports": 0, "managerName": "James King", "title": "CFO", "department": "Accounting", "cellPhone": "617-000-0003", "officePhone": "781-000-0003", "email": "elee@fakemail.com", "city": "Boston, MA", "pic": "eugene_lee.jpg", "twitterId": "@fakeelee", "blog": "http://coenraets.org"},
@@ -12,3 +12,4 @@
         {"id": 11, "firstName": "Amy", "lastName": "Jones", "fullName": "Amy Jones", "managerId": 5, "reports": 0, "managerName": "Ray Moore", "title": "Sales Representative", "department": "Sales", "cellPhone": "617-000-0011", "officePhone": "781-000-0011", "email": "ajones@fakemail.com", "city": "Boston, MA", "pic": "amy_jones.jpg", "twitterId": "@fakeajones", "blog": "http://coenraets.org"},
         {"id": 12, "firstName": "Steven", "lastName": "Wells", "fullName": "Steven Wells", "managerId": 4, "reports": 0, "managerName": "John Williams", "title": "Software Architect", "department": "Engineering", "cellPhone": "617-000-0012", "officePhone": "781-000-0012", "email": "swells@fakemail.com", "city": "Boston, MA", "pic": "steven_wells.jpg", "twitterId": "@fakeswells", "blog": "http://coenraets.org"}
     ]
+    }

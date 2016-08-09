@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +9,24 @@
 <meta name="author" content="">
 <link rel="icon" href="favicon.ico">
 
-<title>SSA Twitter Bootstrap</title>
+<title></title>
 
 <!-- Bootstrap core CSS -->
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="dist/css/ssa-twitter.css" rel="stylesheet">
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script>
+		window.jQuery
+				|| document.write('<script src="js/jquery.min.js"><\/script>')
+	</script>
+	<script src="dist/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -43,6 +53,7 @@
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Home</a></li>
+					<li><a href="addProfile.html">AddProfile</a></li>
 					<li><a href="about.html">About</a></li>
 				</ul>
 			</div>
@@ -53,44 +64,57 @@
 	<!-- Begin page content -->
 	<div class="container">
 		<div class="page-header">
-			<h1>SSA Bootstrap Training</h1>
 			<h3>Twitter Followers</h3>
 		</div>
 		<p class="lead">
 			Here is the list of application followers ...
 		</p>
-		<div id="id01"></div>
+		<!-- Stack the columns on mobile by making one full-width and the other half-width -->
+		<script id="entry-template" type="text/x-handlebars-template">
+			{{#each employee}}
+			<div class="row bgcolor">
+				<div class="col-md-2"><img src="dist/img/{{pic}}" alt="Profile Picture" height="72" width="72"></div>
+				<div class="col-md-4"><span class="lead"><a href="profile.html?id={{id}}">{{fullName}}</a></span><br/><span>{{title}}</div>
+			</div>
+			{{/each}}
+		</script>
+		<div id="entry-display"></div>
+	</div>
 		<script>
 			var xmlhttp = new XMLHttpRequest();
 			//var url = "./employee.json";
-			 var url = "http://localhost:8090/bootcamp/employee.json";
+			var url = "http://localhost:8090/bootcamp/employee.json";
 
 			xmlhttp.onreadystatechange = function() {
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					myFunction(xmlhttp.responseText);
+					//Grab the inline template
+					var template = document.getElementById('entry-template').innerHTML;
+
+					//Compile the template
+					var compiled_template = Handlebars.compile(template);
+
+					//Render the data into the template
+					var rendered = compiled_template(JSON.parse(xmlhttp.responseText));
+
+					//Overwrite the contents of #target with the renderer HTML
+					if (rendered != null){
+						//alert(rendered);
+						document.getElementById('entry-display').innerHTML = rendered;
+					} else {
+						document.getElementById('entry-display').innerHTML = "no value";
+					}
+						
+					
+					//var source   = $("#entry-template").html();
+					//var template = Handlebars.compile(source);
+					//var html    = template();
 				}
 			}
 			xmlhttp.open("GET", url, true);
 			xmlhttp.send();
 
-			function myFunction(response) {
-				var arr = JSON.parse(response);
-	    
-	    		var data;
-	    		var vhtml = '';
-	    		for (var i =0 ; i < arr.length; i++){
-	    			data = arr[i];
-					var obj1 = document.getElementById("id01");
-					vhtml = vhtml + '<div class="row bgcolor"><div class="col-md-2"><img src="dist/img/'+ data.pic +'" alt="Profile Picture" height="72" width="72"></div><div class="col-md-4"><span class="lead"><a href="profile.html?id=' + data.id +'">' + data.id + data.fullName + '</a></span><br/><span>' + data.title + '</div></div>';
-				}
-				//alert(vhtml);
-				obj1.innerHTML = vhtml;
-			}
+
 		</script>
-		<!-- Stack the columns on mobile by making one full-width and the other half-width -->
-
-
-	</div>
 
 	<footer class="footer">
 		<div class="container">
@@ -98,17 +122,5 @@
 				SSA.</p>
 		</div>
 	</footer>
-
-
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script>
-		window.jQuery
-				|| document.write('<script src="js/jquery.min.js"><\/script>')
-	</script>
-	<script src="dist/js/bootstrap.min.js"></script>
 </body>
 </html>
