@@ -27,9 +27,10 @@ function loadText()
 		var txtTwitter = document.getElementById("idtxtTwitter").value;  
 		var currentdate = new Date().toGMTString();
 		
-		var user =  getCookie("user");
+		//var user =  getCookie("user");
 	
-		var updateUrl = url + '?user=' + user + '&message="' + txtTwitter + '"'; //hard coded user
+		var updateUrl = url + '?message="' + txtTwitter + '"'
+		//+ '?user=' + user + '&message="' + txtTwitter + '"'; //hard coded user
 		
 		var xhttp = new XMLHttpRequest();
     		xhttp.onreadystatechange = function() {

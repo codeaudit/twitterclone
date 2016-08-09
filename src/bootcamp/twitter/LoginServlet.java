@@ -27,38 +27,36 @@ public class LoginServlet extends HttpServlet
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-    	Cookie[] cookies = request.getCookies();
-    	if(cookies != null)
-	    	for(Cookie c: cookies)
-	    	{
-	    		
-	    		System.out.println("cookie name = " +c.getName());
-	    		System.out.println("cookie value = " +c.getValue());
-	    	}
+//    	Cookie[] cookies = request.getCookies();
+//    	if(cookies != null)
+//	    	for(Cookie c: cookies)
+//	    	{
+//	    		
+//	    		System.out.println("cookie name = " +c.getName());
+//	    		System.out.println("cookie value = " +c.getValue());
+//	    	}
     	
     	
-    	System.out.println(request.getParameterMap());
-    	
-    	
-    	Cookie cookie = new Cookie("user",request.getParameter("user"));
-    	
-        response.addCookie(cookie);
+//    	System.out.println(request.getParameterMap());
+//    	
+//    	
+//    	Cookie cookie = new Cookie("user",request.getParameter("user"));
+//    	
+//        response.addCookie(cookie);
+//        
         
         
-        
-        if(cookies != null)
-	    	for(Cookie c: cookies)
-	    	{
-	    		
-	    		System.out.println("cookie name = " +c.getName());
-	    		System.out.println("cookie value = " +c.getValue());
-	    	}
-    	
+//        if(cookies != null)
+//	    	for(Cookie c: cookies)
+//	    	{
+//	    		
+//	    		System.out.println("cookie name = " +c.getName());
+//	    		System.out.println("cookie value = " +c.getValue());
+//	    	}
+//    	
     	response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
         
-        // http://localhost:8090/bootcamp/main.html
-        response.sendRedirect("http://localhost:8090/bootcamp/main.html");
         
     	Connection c = null;
         try {
@@ -72,7 +70,9 @@ public class LoginServlet extends HttpServlet
         Map obj = new HashMap();
         obj.put("message", "database opened!");
         obj.put("class", getClass().getName());
-        //obj.put("session", request.getSession(true).getId());
+        obj.put("session", request.getSession(true).getId());
+        
+        request.getSession().setAttribute("user", (String)request.getParameter("user"));
         
         List list = new ArrayList();
         list.add(obj);
@@ -81,5 +81,8 @@ public class LoginServlet extends HttpServlet
 		String json = gson.toJson(list);
         
         response.getWriter().print(json);
+        // http://localhost:8090/bootcamp/main.html
+        response.sendRedirect("http://localhost:8090/bootcamp/main.html");
+            
     }
 }

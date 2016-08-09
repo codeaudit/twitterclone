@@ -29,8 +29,11 @@ public class ViewTweetsServlet extends HttpServlet
         response.setStatus(HttpServletResponse.SC_OK);
       
         ViewTweets view = new ViewTweets();
+        
+        String user = (String)request.getSession().getAttribute("user");
+        
         Map map = new HashMap();
-        map.put("user", request.getParameter("user"));
+        map.put("user", user);
         
         String message = request.getParameter("message");
         if( message != null )
