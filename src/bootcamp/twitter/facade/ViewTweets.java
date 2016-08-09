@@ -14,6 +14,8 @@ import com.google.gson.*;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 
 import bootcamp.twitter.orm.Follower;
@@ -39,13 +41,16 @@ public class ViewTweets
         tweetDao = setup(tweetDao);
     	
 	        
-        List<Tweet> list = new ArrayList<Tweet>();
+        //List<Tweet> list = new ArrayList<Tweet>();
        
+        List<Tweet> list = queryTweets(request, tweetDao);
 
-        
+
+        /*
         for (Tweet tweet: tweetDao) { 
        	 list.add(tweet);
 		}
+		*/
         
         Collections.sort((List<Tweet>)list, new Comparator<Tweet>() {
 
@@ -59,6 +64,27 @@ public class ViewTweets
         
         return list;
     }
+	private List<Tweet> queryTweets(Map request, Dao<Tweet, Integer> tweetDao) {
+		// get our query builder from the DAO
+        QueryBuilder<Tweet, Integer> queryBuilder =
+          tweetDao.queryBuilder();
+        // query for all accounts that have "qwerty" as a password
+		List<Tweet> list = new ArrayList<Tweet>();
+		try {
+			String user = (String) request.get("user");
+			if( user.isEmpty() ) user = "user1";
+				System.out.println("USER IS EMPTY!");
+			// the 'password' field must be equal to "qwerty"
+			queryBuilder.where().eq("userId", user);
+			// prepare our sql statement
+			PreparedQuery<Tweet> preparedQuery = queryBuilder.prepare();
+			list = tweetDao.query(preparedQuery);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
     
 	private Dao<Tweet, Integer> setup(Dao<Tweet, Integer> tweetDao) {
 		ConnectionSource connectionSource;
@@ -80,7 +106,9 @@ public class ViewTweets
 		}
 		return tweetDao;
 	}
-	public List<Object> add(Map map) {
+	
+	
+	public List<Tweet> add(Map map) {
 		ConnectionSource  connectionSource;
     	Dao<User, Integer> userDao; 
     	Dao<Follower, Integer> followerDao; 
@@ -89,11 +117,14 @@ public class ViewTweets
         tweetDao = setup(tweetDao);
     	
 	        
-        List<Object> list = new ArrayList<Object>();
-       
+        //List<Object> list = new ArrayList<Object>();
+        
+        
         Tweet newTweet = new Tweet();
         newTweet.setMessage((String) map.get("message"));
-        //newTweet.setUserId((int) map.get("user"));
+        newTweet.setUserId((String) map.get("user"));
+        
+        System.out.println("newTweet:" + newTweet);
         
         try {
 			tweetDao.create(newTweet);
@@ -102,9 +133,8 @@ public class ViewTweets
 			e.printStackTrace();
 		}
         
-        for (Tweet tweet: tweetDao) { 
-       	 list.add(tweet);
-		}
+        List<Tweet> list = queryTweets(map, tweetDao);
+
         
         return list;
 		

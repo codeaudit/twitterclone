@@ -28,19 +28,31 @@ public class LoginServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
     	Cookie[] cookies = request.getCookies();
-    	for(Cookie c: cookies)
-    	{
-    		
-    		System.out.println("cookie name = " +c.getName());
-    		System.out.println("cookie value = " +c.getValue());
-    	}
+    	if(cookies != null)
+	    	for(Cookie c: cookies)
+	    	{
+	    		
+	    		System.out.println("cookie name = " +c.getName());
+	    		System.out.println("cookie value = " +c.getValue());
+	    	}
     	
     	
     	System.out.println(request.getParameterMap());
     	
     	
     	Cookie cookie = new Cookie("user",request.getParameter("user"));
-    	response.addCookie(cookie);
+    	
+        response.addCookie(cookie);
+        
+        
+        
+        if(cookies != null)
+	    	for(Cookie c: cookies)
+	    	{
+	    		
+	    		System.out.println("cookie name = " +c.getName());
+	    		System.out.println("cookie value = " +c.getValue());
+	    	}
     	
     	response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
@@ -60,7 +72,7 @@ public class LoginServlet extends HttpServlet
         Map obj = new HashMap();
         obj.put("message", "database opened!");
         obj.put("class", getClass().getName());
-        obj.put("session", request.getSession(true).getId());
+        //obj.put("session", request.getSession(true).getId());
         
         List list = new ArrayList();
         list.add(obj);

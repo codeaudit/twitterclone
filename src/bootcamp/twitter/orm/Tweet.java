@@ -15,7 +15,7 @@ public class Tweet {
 	@DatabaseField(generatedId = true)
 	int id;
 	@DatabaseField
-	int userId;
+	String userId;
 	@DatabaseField
 	String message;
 	@DatabaseField
@@ -29,7 +29,7 @@ public class Tweet {
 	
 	
 	
-	public Tweet(String message, int user) {
+	public Tweet(String message, String user) {
 		super();
 		this.message = message;
 	    this.userId = user;
@@ -41,12 +41,25 @@ public class Tweet {
 		return id;
 	}
 	
-	public int getUserId() {
+	
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+
+
+
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
 	public String getMessage() {
 		return message;
 	}

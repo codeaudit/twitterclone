@@ -58,7 +58,7 @@ public class TestOrm {
 	
 	@Test
 	public void testTweet() throws SQLException {
-		Tweet tweet = new Tweet("this is a tweet " + Math.random(), 0);
+		Tweet tweet = new Tweet("this is a tweet " + Math.random(), "user1");
 		
 		tweetDao.create(tweet);
 		

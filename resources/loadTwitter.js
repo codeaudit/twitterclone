@@ -1,63 +1,21 @@
 var serviceLoc = "http://localhost:8090/servlet/tweets.do";
-	// "http://localhost:8090/bootcamp/twittermessage.json";
-
-/*
-// create data object to contain form data
-function AddressBookEntry(name,currentdate) {
-    this.name = name;
-	this.currentdate=currentdate;
-    
-}
-
-function go(){
-    // create data structure
-    var addressBook = {entries:[]};  // this should be JSON array object
-
-    // create onclick function for button
-    document.getElementById("submit").onclick = function() {
-        // get values from each form field
-        var name = document.getElementById("idtxtTwitter").value;
-       var currentdate = new Date().toGMTString();
-
-        // create new object using consturctor
-        var newAddress = new AddressBookEntry(name,currentdate);
-		
-        //var jAddress = JSON.stringify(newAddress);
-
-        // push new object into array
-        addressBook.entries.push(newAddress);
-        localStorage.setItem("addressBook", JSON.stringify(addressBook));
-
-        // add information to page
-
-        // write data to the page
-        console.log(addressBook);
-        // store the data
-		//alert(name);
-        // read from storage and write to page if data found
-		var newloadtext = new loadText(name,addressBook);
-        return true;
-    }
-}*/
- /*function saveDataInLS(){
-    var obj={};
-        obj.name=document.getElementById('idtxtTwitter').value;
-        alert(obj.name);
-
-    var listObj=localStorage.getItem('DATA');
-    if(listObj!=null){
-      listObj=JSON.parse(listObj); //this will give array of object
-      listObj.push(obj);
-    }else{
-      listObj=[obj]; //first time 
-    }
-   // Save Data in Local Storage 
-    localStorage.setItem('DATA',JSON.stringify(listObj)); 
-   //Please check Local Storage which will be like
-    //[{"name":"Anand","phone":"6546456456"}{"name":"Andy","phone":"78688"}]
-}*/
 
 loadText();
+
+function getCookie(name)
+{
+	var lines = document.cookie.split(";");
+	for( var l in lines )
+		{
+		if( l.indexOf(name) != -1 )
+			{
+			var w = l.split("=");
+			return w[1];
+			}
+		}
+	return "";
+}
+
 
 
 function loadText()
@@ -69,8 +27,9 @@ function loadText()
 		var txtTwitter = document.getElementById("idtxtTwitter").value;  
 		var currentdate = new Date().toGMTString();
 		
-		
-		var updateUrl = url + '?user=user1&message="' + txtTwitter + '"'; //hard coded user
+		var user =  getCookie("user");
+	
+		var updateUrl = url + '?user=' + user + '&message="' + txtTwitter + '"'; //hard coded user
 		
 		var xhttp = new XMLHttpRequest();
     		xhttp.onreadystatechange = function() {
@@ -115,13 +74,7 @@ function loadText()
 						}
 			};
 		
-function SortByID(x,y) {
-      return x.ID - y.ID; 
-    }
-
-//Usage
-
-					
+			
 					 
 			xhttp.open("GET", updateUrl ,true);
     		xhttp.send();
